@@ -12,8 +12,6 @@ class TestCreateUser:
         response = requests.post(f"{Constants.URL}{Endpoints.CREATE_USER}",
                                  data=create_payload_and_then_delete_user)
         token_with_bearer = response.json()["accessToken"]
-        user_token = token_with_bearer.split()
-        token = user_token[1]
         assert response.status_code == 200
         assert response.json()["success"] == True
 
@@ -22,8 +20,6 @@ class TestCreateUser:
         resp_first = requests.post(f"{Constants.URL}{Endpoints.CREATE_USER}",
                                    data=create_payload_and_then_delete_user)
         token_with_bearer = resp_first.json()["accessToken"]
-        user_token = token_with_bearer.split()
-        token = user_token[1]
         resp_second = requests.post(f"{Constants.URL}{Endpoints.CREATE_USER}",
                                     data=create_payload_and_then_delete_user)
         assert resp_second.status_code == 403

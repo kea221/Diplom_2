@@ -11,3 +11,4 @@ class Endpoints:
     GET_USER_DATA = "/api/auth/user"
     CHANGE_USER_DATA = "/api/auth/user"
     CREATE_ORDER = "/api/orders"
+    LOGOUT = "/api/auth/logout"
