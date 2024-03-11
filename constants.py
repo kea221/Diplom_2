@@ -1,5 +1,3 @@
-
-
 class Constants:
     URL = "https://stellarburgers.nomoreparties.site"
 
@@ -12,3 +10,11 @@ class Endpoints:
     CHANGE_USER_DATA = "/api/auth/user"
     CREATE_ORDER = "/api/orders"
     LOGOUT = "/api/auth/logout"
+
+
+class TextError:
+    UNAUTORIZED = "You should be authorised"
+    NO_PROVIDED_INGR = "Ingredient ids must be provided"
+    EXISTING_USER = "User already exists"
+    REQUIRED_FIELD = "Email, password and name are required fields"
+    INCORRECT = "email or password are incorrect"

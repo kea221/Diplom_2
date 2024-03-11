@@ -1,6 +1,6 @@
 import requests
 import allure
-from constants import Constants, Endpoints
+from constants import Constants, Endpoints, TextError
 
 
 class TestCreateOrder:
@@ -22,14 +22,14 @@ class TestCreateOrder:
                                    "61c0c5a71d1f82001bdaaa72"]}
         response = requests.post(f"{Constants.URL}{Endpoints.CREATE_ORDER}", data=payload)
         assert response.status_code == 401
-        assert response.json()["message"] == "You should be authorised"
+        assert response.json()["message"] == TextError.UNAUTORIZED
 
     @allure.title("Авторизованный пользователь не может создать заказ без ингредиентов")
     def test_create_order_by_authorized_user_without_ingrds_order_not_created(self, create_user_then_delete_user):
         response = requests.post(f"{Constants.URL}{Endpoints.CREATE_ORDER}",
                                  headers={"Authorization": f"Bearer {create_user_then_delete_user[1]}"})
         assert response.status_code == 400
-        assert response.json()["message"] == "Ingredient ids must be provided"
+        assert response.json()["message"] == TextError.NO_PROVIDED_INGR
 
     @allure.title("Авторизованный пользователь не может создать заказ с неверным хешем ингредиентов")
     def test_create_order_by_authorized_user_with_invalid_ingrds_order_not_created(self, create_user_then_delete_user):
